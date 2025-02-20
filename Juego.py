@@ -14,7 +14,7 @@ pygame.init()
 # Establecemos las dimensiones de la pantalla [largo,altura]
 dimensiones = [700,500]
 pantalla = pygame.display.set_mode(dimensiones) 
-pygame.display.set_caption("Mi Primer juego en Informática")
+pygame.display.set_caption("ZeldaPython2")
   
 #El bucle se ejecuta hasta que el usuario hace click sobre el botón de cierre.
  
@@ -22,7 +22,7 @@ hecho = False
  
   
 # Se usa para establecer cuan rápido se actualiza la pantalla
- 
+i=0 
 reloj = pygame.time.Clock()
   
 # -------- Bucle principal del Programa -----------
@@ -33,13 +33,11 @@ while not hecho:
             hecho = True
      
     # --- LA LÓGICA DEL JUEGO DEBERÍA IR AQUÍ
-    if i == 5:
-     pygame.draw.circle(4,4,4,4)
-    else
-     pygame.draw.polygon(5,5,5)
+    
+    
     
     # --- EL CÓDIGO DE DIBUJO DEBERÍA IR AQUÍ
-     
+    
     # Primero, limpia la pantalla con blanco. No vayas a poner otros comandos de dibujo encima 
     # de esto, de otra forma serán borrados por este comando:
     pantalla.fill(BLANCO)
