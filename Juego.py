@@ -1,53 +1,55 @@
 import pygame
- 
-# Definimos algunos colores
-NEGRO = (0, 0 ,0)
-BLANCO = (255, 255, 255)
-VERDE = (0, 255, 0)
-ROJO = (255, 0, 0)
-AZUL = (0, 0, 255)
-VIOLETA = (98, 0, 255)
-  
-pygame.init()
-pygame.mixer.init()
-pygame.mixer.music.load("cancionbase.ogg") 
-pygame.mixer.music.play(-1,0.0)
-# Establecemos las dimensiones de la pantalla [largo,altura]
-dimensiones = [700,500]
-pantalla = pygame.display.set_mode(dimensiones) 
-pygame.display.set_caption("Mi Primer juego en Informática")
-  
-#El bucle se ejecuta hasta que el usuario hace click sobre el botón de cierre.
- 
-hecho = False
- 
-  
-# Se usa para establecer cuan rápido se actualiza la pantalla
- 
-reloj = pygame.time.Clock()
-  
-# -------- Bucle principal del Programa -----------
-while not hecho:
-    # --- Bucle principal de eventos
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT: 
-            hecho = True
-     
-    # --- LA LÓGICA DEL JUEGO DEBERÍA IR AQUÍ
-  
-    # --- EL CÓDIGO DE DIBUJO DEBERÍA IR AQUÍ
-     
-    # Primero, limpia la pantalla con blanco. No vayas a poner otros comandos de dibujo encima 
-    # de esto, de otra forma serán borrados por este comando:
-    pantalla.fill(BLANCO)
-     
-    # --- Avanzamos y actualizamos la pantalla con lo que hemos dibujado.
-    pygame.display.flip()
- 
-    # --- Limitamos a 60 fotogramas por segundo (frames per second)
-    reloj.tick(60)
-     
-# Cerramos la ventana y salimos.
-# Si te olvidas de esta última línea, el programa se 'colgará'
-# al salir si lo hemos estado ejecutando desde el IDLE.
-pygame.quit()
+import sys
+import variables
+
+# Import modules from the PYTHON GAME folder
+
+from PYTHON_GAME import ui
+from PYTHON_GAME import tutorial
+from PYTHON_GAME import dungeon
+from PYTHON_GAME import Untitled_1  
+from PYTHON_GAME import character
+
+def main():
+    pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load("cancionbase.ogg")
+    pygame.mixer.music.play(-1, 0.0)
+    
+    # Set display dimensions and title
+    screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Zelda-Inspired Game")
+    clock = pygame.time.Clock()
+
+    # Optionally, start the tutorial (this may block until finished)
+    tutorial.start_tutorial(screen)
+    
+    # Create a player (from character.py) and dungeon enemies (from dungeon.py)
+    player = character.Character(name="Hero")
+    enemies = dungeon.create_dungeon_room()
+    
+    # For demonstration, set an initial player position.
+    x, y = 100, 100
+    
+    running = True
+    while running:
+        # Process events.
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            # Update volume from variables.py (if you have volume buttons elsewhere, pass their rects)
+            variables.update_volume(event, None, None)
+             
+        
+        screen.fill((0, 0, 0))
+        ui.draw_health_bar(screen, player.health)
+        ui.draw_mana_bar(screen, player.mana)
+        Untitled_1.draw_player(screen, x, y)
+        pygame.display.flip()
+        clock.tick(60)
+    
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
