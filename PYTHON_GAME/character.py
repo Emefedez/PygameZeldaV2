@@ -1,4 +1,3 @@
-import pygame
 class Character:
     def __init__(self, name="Hero", health=100, mana=100, sword_damage=40, shield_block=0):
         self.name = name
