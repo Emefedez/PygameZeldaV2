@@ -67,7 +67,6 @@ OSCILLATIONOFFSET =  5       # Posición inicial
 OSCILLATIONVELOCITY = 0.3 
 SPRINGSTRENGTH = 0.01      # efecto rebote
 
-clock = pygame.time.Clock()
 
 # FLICKER FUERA
 FLICKERUPDATE = 140 
@@ -77,103 +76,105 @@ ALPHAFONDO = random.randint(120, 180)
 COLORPLAY = RED 
 COLORQUIT = YELLOW
 
-while True:
-    volume = variables.volume
+if __name__ == "__main__":
+    clock = pygame.time.Clock()
+    while True:
+        volume = variables.volume
 
-    # RESETS PARA COLORES
-    COLORVOLUMEMINUS = GREY
-    COLORVOLUMEPLUS = GREY
+        # RESETS PARA COLORES
+        COLORVOLUMEMINUS = GREY
+        COLORVOLUMEPLUS = GREY
 
-    if variables.volume > 0.8:
-        COLORVOLUMENUMBER = RED
-    elif variables.volume < 0.5:
-        COLORVOLUMENUMBER = GREEN
-    else:
-        COLORVOLUMENUMBER = YELLOW
-
-    # Dibujar imagen de FONDO
-    screen.blit(FONDO, (0, 0))
-
-    # OSCILACIÓN ZANAHORIA
-    OSCILLATIONVELOCITY += -SPRINGSTRENGTH * OSCILLATIONOFFSET
-    OSCILLATIONOFFSET += OSCILLATIONVELOCITY
-
-    # FLICKER
-    TICK = pygame.time.get_ticks()
-    if TICK - last_flicker_time >= FLICKERUPDATE:
-        ALPHAFONDO = random.randint(120, 230)
-        last_flicker_time = TICK
-
-    overlay = pygame.Surface((width, height))
-    overlay.fill(BLACK)
-    overlay.set_alpha(ALPHAFONDO)
-    screen.blit(overlay, (0, 0))
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        
-        # click play?
-        if button_rect.collidepoint(pygame.mouse.get_pos()):
-            COLORPLAY = RED
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                import Juego
+        if variables.volume > 0.8:
+            COLORVOLUMENUMBER = RED
+        elif variables.volume < 0.5:
+            COLORVOLUMENUMBER = GREEN
         else:
-            COLORPLAY = GREEN
+            COLORVOLUMENUMBER = YELLOW
 
-        # click quit?
-        if button_rect2.collidepoint(pygame.mouse.get_pos()):
-            COLORQUIT = BLUE
-            if event.type == pygame.MOUSEBUTTONDOWN:
+        # Dibujar imagen de FONDO
+        screen.blit(FONDO, (0, 0))
+
+        # OSCILACIÓN ZANAHORIA
+        OSCILLATIONVELOCITY += -SPRINGSTRENGTH * OSCILLATIONOFFSET
+        OSCILLATIONOFFSET += OSCILLATIONVELOCITY
+
+        # FLICKER
+        TICK = pygame.time.get_ticks()
+        if TICK - last_flicker_time >= FLICKERUPDATE:
+            ALPHAFONDO = random.randint(120, 230)
+            last_flicker_time = TICK
+
+        overlay = pygame.Surface((width, height))
+        overlay.fill(BLACK)
+        overlay.set_alpha(ALPHAFONDO)
+        screen.blit(overlay, (0, 0))
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        else:
-            COLORQUIT = YELLOW
+            
+            # click play?
+            if button_rect.collidepoint(pygame.mouse.get_pos()):
+                COLORPLAY = RED
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    import Juego
+            else:
+                COLORPLAY = GREEN
 
-        # modificar volumen
-        variables.update_volume(event, volumebutton_rectplus, volumebutton_rectminus)
-    
-    # Actualizar variables volumen
-    pygame.mixer.music.set_volume(variables.volume)
-    
-    # Dibujar
-    pygame.draw.rect(screen, COLORPLAY, button_rect)
-    text_rect = button_text.get_rect(center=button_rect.center)
-    screen.blit(button_text, text_rect)
+            # click quit?
+            if button_rect2.collidepoint(pygame.mouse.get_pos()):
+                COLORQUIT = BLUE
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pygame.quit()
+                    sys.exit()
+            else:
+                COLORQUIT = YELLOW
 
-    pygame.draw.rect(screen, COLORQUIT, button_rect2)
-    text_rect2 = button_text2.get_rect(center=button_rect2.center)
-    screen.blit(button_text2, text_rect2)
-    
-    # color botones 
-    if volumebutton_rectplus.collidepoint(pygame.mouse.get_pos()):
-        COLORVOLUMEPLUS = LIGHTGREY
-    if volumebutton_rectminus.collidepoint(pygame.mouse.get_pos()):
-        COLORVOLUMEMINUS = LIGHTGREY
+            # modificar volumen
+            variables.update_volume(event, volumebutton_rectplus, volumebutton_rectminus)
+        
+        # Actualizar variables volumen
+        pygame.mixer.music.set_volume(variables.volume)
+        
+        # Dibujar botones play y quit
+        pygame.draw.rect(screen, COLORPLAY, button_rect)
+        text_rect = button_text.get_rect(center=button_rect.center)
+        screen.blit(button_text, text_rect)
 
-    # Dibujar botones de volumen
-    pygame.draw.rect(screen, COLORVOLUMEPLUS, volumebutton_rectplus)
-    pygame.draw.rect(screen, COLORVOLUMEMINUS, volumebutton_rectminus)
-    
-    plus_symbol = font.render("+", True, BLACK)
-    minus_symbol = font.render("-", True, BLACK)
-    screen.blit(plus_symbol, plus_symbol.get_rect(center=volumebutton_rectplus.center))
-    screen.blit(minus_symbol, minus_symbol.get_rect(center=volumebutton_rectminus.center))
-    
-    # porcentaje de volumen
-    vol_percentage = font.render(f"{int(volume * 100)}%", True, COLORVOLUMENUMBER)
-    center_x = (volumebutton_rectplus.centerx + volumebutton_rectminus.centerx) // 2
-    center_y = min(volumebutton_rectplus.top, volumebutton_rectminus.top) + 25
-    vol_rect = vol_percentage.get_rect(center=(center_x, center_y))
-    screen.blit(vol_percentage, vol_rect)
-    
-    # Posicion zanahoria
-    ZANAHORIAPOSITION = (100, 200 + OSCILLATIONOFFSET)
-    screen.blit(zanahoriascaled, ZANAHORIAPOSITION)
-    
-    # Dibujar el logo encima de todo
-    screen.blit(title_sprite, title_rect)
-    
-    pygame.display.flip()
-    clock.tick(60)
+        pygame.draw.rect(screen, COLORQUIT, button_rect2)
+        text_rect2 = button_text2.get_rect(center=button_rect2.center)
+        screen.blit(button_text2, text_rect2)
+        
+        # Cambiar color de botones de volumen si el mouse se posiciona sobre ellos
+        if volumebutton_rectplus.collidepoint(pygame.mouse.get_pos()):
+            COLORVOLUMEPLUS = LIGHTGREY
+        if volumebutton_rectminus.collidepoint(pygame.mouse.get_pos()):
+            COLORVOLUMEPLUS = LIGHTGREY
+
+        # Dibujar botones de volumen
+        pygame.draw.rect(screen, COLORVOLUMEPLUS, volumebutton_rectplus)
+        pygame.draw.rect(screen, COLORVOLUMEMINUS, volumebutton_rectminus)
+        
+        plus_symbol = font.render("+", True, BLACK)
+        minus_symbol = font.render("-", True, BLACK)
+        screen.blit(plus_symbol, plus_symbol.get_rect(center=volumebutton_rectplus.center))
+        screen.blit(minus_symbol, minus_symbol.get_rect(center=volumebutton_rectminus.center))
+        
+        # Mostrar porcentaje de volumen
+        vol_percentage = font.render(f"{int(volume * 100)}%", True, COLORVOLUMENUMBER)
+        center_x = (volumebutton_rectplus.centerx + volumebutton_rectminus.centerx) // 2
+        center_y = min(volumebutton_rectplus.top, volumebutton_rectminus.top) + 25
+        vol_rect = vol_percentage.get_rect(center=(center_x, center_y))
+        screen.blit(vol_percentage, vol_rect)
+        
+        # Posición de la zanahoria
+        ZANAHORIAPOSITION = (100, 200 + OSCILLATIONOFFSET)
+        screen.blit(zanahoriascaled, ZANAHORIAPOSITION)
+        
+        # Dibujar el logo encima de todo
+        screen.blit(title_sprite, title_rect)
+        
+        pygame.display.flip()
+        clock.tick(60)
