@@ -16,8 +16,8 @@ clock = pygame.time.Clock()
 # metemos las imágenes en un diccionario para escalarlas en  una sola línea
 
 tile_images = {
-    'b': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/Enviroment/Cocina/Baldosa.png").convert_alpha(),
-    'E': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/zanahoria2.png").convert_alpha()
+    'm': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/Enviroment/Cocina/Madera2.png").convert_alpha(),
+    'b': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/Enviroment/Cocina/Baldosa.png").convert_alpha()
 }
 
 # escalamos las imagenes
@@ -25,32 +25,43 @@ better_tileimages = {}
 for letter, image in tile_images.items():
     better_tileimages[letter] = pygame.transform.scale(image, (TILE_WIDTH, TILE_HEIGHT))
 
-# Example tilemaps (each sub-list is a row)
+# Example tilemaps (each sub-list is a row) EMPIEZA EN 0
 room1 = [
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
-    ['b','b','b','b','b','b','b','E','b','b','b','b'],
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
-    ['b','b','b','b','b','b','b','b','b','b','b','b'],
-    ['b','b','b','b','b','E','b','b','b','b','b','b'],
-    ['b','b','b','b','b','b','b','b','b','b','b','b'],
-    ['b','b','b','b','b','b','b','b','b','b','b','b'],
-    ['b','b','b','b','b','b','b','b','b','b','b','b']
+    ['b','b','b','b','b','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b']
 ]
 
-roomactual = 0
+room2 = [
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b']
+]
+rooms = [room1, room2]
 
-for i in range(0,9):
-    for j in range(0,12):
-        if room1[i][j]== "b":
-            screen.blit(better_tileimages['b'], (j*TILE_WIDTH, i*TILE_HEIGHT))
-        if room1[i][j]== "E":
-            screen.blit(better_tileimages['E'], (j*TILE_WIDTH, i*TILE_HEIGHT))
-            
-            
-pygame.display.flip()
+
 
 while True:
+    roomactual = 0
+    for i in range(0,9):
+        for j in range(0,12): 
+            current_tile = rooms[roomactual][i][j]
+            screen.blit(better_tileimages[current_tile], (j * TILE_WIDTH, i * TILE_HEIGHT))
+    
+    pygame.display.flip()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()

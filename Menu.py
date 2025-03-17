@@ -119,7 +119,7 @@ if __name__ == "__main__":
             if button_rect.collidepoint(pygame.mouse.get_pos()):
                 COLORPLAY = RED
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    import Juego
+                    import room
             else:
                 COLORPLAY = GREEN
 
@@ -151,7 +151,7 @@ if __name__ == "__main__":
         if volumebutton_rectplus.collidepoint(pygame.mouse.get_pos()):
             COLORVOLUMEPLUS = LIGHTGREY
         if volumebutton_rectminus.collidepoint(pygame.mouse.get_pos()):
-            COLORVOLUMEPLUS = LIGHTGREY
+            COLORVOLUMEMINUS = LIGHTGREY
 
         # Dibujar botones de volumen
         pygame.draw.rect(screen, COLORVOLUMEPLUS, volumebutton_rectplus)
