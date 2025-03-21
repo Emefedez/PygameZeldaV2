@@ -16,8 +16,8 @@ clock = pygame.time.Clock()
 # metemos las imágenes en un diccionario para escalarlas en  una sola línea
 
 tile_images = {
-    'm': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/Enviroment/Cocina/Madera2.png").convert_alpha(),
-    'b': pygame.image.load("/Users/mateo/Documents/Dev/Gamedev/Pygame/PygameZelda2/PygameZeldaV2/Sprites/Enviroment/Cocina/Baldosa.png").convert_alpha()
+    'm': pygame.image.load("Sprites/Enviroment/Cocina/Madera2.png").convert_alpha(),
+    'b': pygame.image.load("Sprites/Enviroment/Cocina/Baldosa.png").convert_alpha()
 }
 
 # escalamos las imagenes
