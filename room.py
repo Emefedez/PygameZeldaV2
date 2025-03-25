@@ -26,7 +26,7 @@ for letter, image in tile_images.items():
     better_tileimages[letter] = pygame.transform.scale(image, (TILE_WIDTH, TILE_HEIGHT))
 
 # Example tilemaps (each sub-list is a row) EMPIEZA EN 0
-room1 = [
+room0 = [
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
@@ -38,6 +38,17 @@ room1 = [
     ['b','b','b','b','b','m','m','b','b','b','b','b']
 ]
 
+room1 = [
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b']
+]
 room2 = [
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
     ['b','b','b','b','b','b','b','b','b','b','b','b'],
@@ -54,7 +65,7 @@ rooms = [room1, room2]
 
 
 while True:
-    roomactual = 0
+    roomactual = 1
     for i in range(0,9):
         for j in range(0,12): 
             current_tile = rooms[roomactual][i][j]
