@@ -60,12 +60,103 @@ room2 = [
     ['b','b','b','b','b','m','m','b','b','b','b','b'],
     ['b','b','b','b','b','m','m','b','b','b','b','b']
 ]
-rooms = [room1, room2]
+
+room2 = [
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b'],
+    ['b','b','b','b','b','m','m','b','b','b','b','b']
+]
+
+# Room 3: Diagonal pattern – beginning with all 'm' on row 0 and then increasing 'b's on the left.
+room3 = [
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','b','m','m','m','m','m','m'],
+    ['b','b','b','b','b','b','b','m','m','m','m','m'],
+    ['b','b','b','b','b','b','b','b','m','m','m','m']
+]
+
+# Room 4: Border room – outer border is 'm' and interior is 'b'
+room4 = [
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','b','b','b','b','b','b','b','b','b','b','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m']
+]
+
+# Room 5: Checkerboard pattern
+room5 = [
+    ['m','b','m','b','m','b','m','b','m','b','m','b'],
+    ['b','m','b','m','b','m','b','m','b','m','b','m'],
+    ['m','b','m','b','m','b','m','b','m','b','m','b'],
+    ['b','m','b','m','b','m','b','m','b','m','b','m'],
+    ['m','b','m','b','m','b','m','b','m','b','m','b'],
+    ['b','m','b','m','b','m','b','m','b','m','b','m'],
+    ['m','b','m','b','m','b','m','b','m','b','m','b'],
+    ['b','m','b','m','b','m','b','m','b','m','b','m'],
+    ['m','b','m','b','m','b','m','b','m','b','m','b']
+]
+
+# Room 6: Vertical stripes (each stripe 2 columns wide alternating 'm' and 'b')
+room6 = [
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b'],
+    ['m','m','b','b','m','m','b','b','m','m','b','b']
+]
+
+# Room 7: Horizontal stripes (each stripe 2 rows high alternating 'm' and 'b')
+room7 = [
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['b','b','b','b','b','b','b','b','b','b','b','b'],
+    ['m','m','m','m','m','m','m','m','m','m','m','m']
+]
+
+# Room 8: Reverse diagonal pattern – from left 'm' tapering to 'b' on the right.
+room8 = [
+    ['m','m','m','m','m','m','m','m','m','m','m','m'],
+    ['m','m','m','m','m','m','m','m','m','m','m','b'],
+    ['m','m','m','m','m','m','m','m','m','m','b','b'],
+    ['m','m','m','m','m','m','m','m','m','b','b','b'],
+    ['m','m','m','m','m','m','m','m','b','b','b','b'],
+    ['m','m','m','m','m','m','m','b','b','b','b','b'],
+    ['m','m','m','m','m','m','b','b','b','b','b','b'],
+    ['m','m','m','m','m','b','b','b','b','b','b','b'],
+    ['m','m','m','m','b','b','b','b','b','b','b','b']
+]
+
+rooms = [room0, room1, room2, room3, room4, room5, room6, room7, room8]
 
 
 
 while True:
-    roomactual = 1
+    roomactual = 3
     for i in range(0,9):
         for j in range(0,12): 
             current_tile = rooms[roomactual][i][j]
