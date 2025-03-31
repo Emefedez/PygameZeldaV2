@@ -153,19 +153,45 @@ room8 = [
 
 rooms = [room0, room1, room2, room3, room4, room5, room6, room7, room8]
 
-
-
 while True:
-    roomactual = 3
+    roomactual = 0
     for i in range(0,9):
         for j in range(0,12): 
             current_tile = rooms[roomactual][i][j]
             screen.blit(better_tileimages[current_tile], (j * TILE_WIDTH, i * TILE_HEIGHT))
     
+    # ---- Minimapa ----
+    # Dimensiones
+    minimap_margin = 20
+    mini_room_width = 30
+    mini_room_height = 30
+    gap = 5
+    # Posición
+    minimap_x = SCREEN_WIDTH - (5 * mini_room_width + 2 * gap) - minimap_margin
+    minimap_y = minimap_margin
+
+    # Dibujar cuartos
+    for row in range(5):
+        for column in range(5):
+            index = row * 5 + column
+            room_rect = pygame.Rect(minimap_x + column * (mini_room_width + gap),
+                                     minimap_y + row * (mini_room_height + gap),
+                                     mini_room_width,
+                                     mini_room_height)
+            
+            pygame.draw.rect(screen, (100, 100, 100), room_rect, 2)
+            # Colorear cuarto 
+            if index == roomactual:
+                pygame.draw.rect(screen, (255, 0, 0), room_rect)
+                pygame.draw.rect(screen, (0, 0, 0), room_rect, 2)
+
+
+
     pygame.display.flip()
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        
+
+
