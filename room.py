@@ -35,7 +35,8 @@ room0 = [
     ['b','b','b','b','b','m','m','b','b','b','b','b'],
     ['b','b','b','b','b','m','m','b','b','b','b','b'],
     ['b','b','b','b','b','m','m','b','b','b','b','b'],
-    ['b','b','b','b','b','m','m','b','b','b','b','b']
+    ['b','b','b','b','b','m','m','b','b','b','b','b'], #definición de parámetros en la siguiente línea
+    [XXXa, room3ab, XXXiz, room1d]
 ]
 
 room1 = [
